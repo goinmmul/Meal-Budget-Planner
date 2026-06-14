@@ -165,122 +165,115 @@ Next.js's standard `.next` output directory for Vercel compatibility.
 
 # Part 2. AI Development Report
 
-## 1. AI Tool Used
+## 1. AI Tools Used
 
-OpenAI Codex was used as the AI-assisted development tool. It worked inside the
-local project repository and was used to inspect files, create and edit source
-code, run development commands, diagnose errors, and prepare documentation.
+OpenAI Codex was used as an AI-assisted development tool. Its main role was to
+support code implementation and review bugs, build errors, and deployment
+configuration problems. It suggested code changes and debugging steps inside
+the local repository.
 
-No AI model is used by the final web service at runtime. The planner uses local,
-understandable TypeScript calculations and local meal data.
+The student reviewed the suggested changes, tested the application, and
+verified the final code and deployment results. AI did not make the final
+project decisions independently, and no AI model is used by the deployed web
+service at runtime. The planner uses local TypeScript calculations and local
+meal data.
 
-## 2. Tasks Supported by AI
+## 2. Tasks Assisted by AI
 
-AI assistance was used for:
+AI assistance was mainly used for:
 
-- Inspecting the initial workspace and identifying that it was empty
-- Creating the Next.js project structure and configuration
-- Implementing the Home, Planner, and About pages
-- Creating reusable navigation and styling
-- Designing the local meal suggestion data structure
-- Implementing budget calculations and recommendation ranking
-- Adding validation and reset behavior
-- Writing and improving the README
-- Running lint, build, and security audit commands
-- Diagnosing Windows and OneDrive build problems
-- Initializing the local Git repository
-- Preparing this PRD and AI Development Report
+- Writing and improving code for the Home, Planner, and About pages
+- Implementing the planner form, calculations, validation, reset behavior, and
+  meal suggestion display
+- Reviewing the local TypeScript meal data and recommendation logic
+- Checking lint and production build results
+- Reviewing OneDrive and Turbopack file-lock errors during local builds
+- Identifying the custom `distDir` setting that prevented Vercel from finding
+  the standard `.next` output
+- Reviewing cleanup of obsolete build output and configuration
+- Checking Vercel build logs and deployment configuration
+
+The project concept, final scope, and acceptance of the completed
+implementation remained the student's responsibility.
 
 ## 3. Representative Prompts and Instructions
 
 The following are representative instructions given during development.
 
-### Prompt 1: Define the service scope
+### Prompt 1: Implement the pages and planner
 
-> Build a Campus Meal Budget Planner for university students. It must focus on
-> budget planning, remaining balance, meal strategy, and simple meal
-> suggestions, not restaurant recommendation.
+> Implement the Home, Planner, and About pages with Next.js, TypeScript, and
+> Tailwind CSS. On the Planner page, calculate the remaining budget and budget
+> per meal, validate the inputs, and show three local meal suggestions.
 
-This instruction established the product topic and prevented the project from
-becoming a restaurant search or recommendation service.
+This instruction focused the assistance on the required pages and the main
+interactive feature.
 
-### Prompt 2: Implement the main interaction
+### Prompt 2: Review the Vercel output error
 
-> On the Planner page, collect total meal budget, amount already spent,
-> remaining number of meals, and meal style. Calculate remaining budget and
-> budget per meal, validate input, show a budget status, and display three meal
-> suggestions.
+> Vercel reports that `/vercel/path0/.next` was not found. Check the build
+> script, `next.config.ts`, Vercel configuration, and output directory. Keep the
+> standard `next build` command and standard `.next` output.
 
-This instruction defined the main TypeScript interaction and expected result
-states.
+This instruction was used to review the deployment configuration and identify
+the custom output-directory problem.
 
-### Prompt 3: Keep the architecture simple
+### Prompt 3: Check validation and bug fixes
 
-> Use Next.js, TypeScript, and Tailwind CSS. Store meal suggestions locally. Do
-> not use an external API, database, backend, login, authentication, or payment.
+> Run `npm run lint` and `npm run build`, review the results, and fix any
+> application or generated-output configuration errors. Confirm that `/`,
+> `/planner`, and `/about` are generated correctly.
 
-This instruction limited unnecessary complexity and kept the implementation
-appropriate for the assignment.
+This instruction supported final verification of the source code and routes.
 
-### Prompt 4: Validate and report accurately
+## 4. Modified or Improved AI-Assisted Results
 
-> Run npm install, npm run lint, and npm run build. Fix all errors. Do not claim
-> deployment success unless deployment was actually completed.
+All AI-assisted code and configuration changes were reviewed by the student
+before being accepted. The final implementation was checked and improved in
+the following ways:
 
-This instruction required verifiable results and prevented unsupported claims
-about deployment.
+- The planner calculations and recommendation ranking were reviewed for clear,
+  understandable local logic.
+- Input validation was verified for blank values, invalid numbers, negative
+  spending, and invalid remaining-meal counts.
+- The meal data was kept in a reusable typed local structure.
+- Unnecessary backend, database, authentication, payment, and external API
+  features were not included.
+- Estimated meal prices were presented as planning information rather than live
+  or guaranteed prices.
+- The final source was tested with `npm run lint` and `npm run build`.
+- The generated routes `/`, `/planner`, and `/about` were checked, and the
+  deployed routes were verified with HTTP status 200 responses.
 
-## 4. AI-Generated Results Modified or Improved
+## 5. Bugs, Errors, and Fixes
 
-The AI-generated implementation was reviewed and improved during development:
+### 5.1 Custom Next.js Output Directory
 
-- The meal data was organized into a reusable typed structure with `name`,
-  `estimatedPrice`, `style`, `description`, and `reason`.
-- Recommendation selection was improved to consider both affordability and the
-  selected meal style.
-- Validation was strengthened to reject blank values, non-finite values,
-  non-positive budgets, negative spending, and non-integer meal counts.
-- The result interface was divided into clear balance, status, strategy, and
-  suggestion sections.
-- The wording was adjusted to avoid presenting estimated meal prices as live or
-  guaranteed prices.
-- Responsive layouts and consistent navigation were added for usability.
-- The README was updated to match the final implementation and assignment
-  requirements.
-- Development and build scripts were changed to webpack after an environment
-  problem was found with Turbopack in the OneDrive directory.
+**Problem:** A temporary `distDir: ".next-build"` setting caused Vercel to look
+for the standard `.next` directory after the build and report that it was
+missing.
 
-## 5. Bugs, Errors, and Limitations
+**Fix:** The custom `distDir` was removed. The production script was restored
+to `next build`, and Vercel was configured to use the standard Next.js output.
 
-### 5.1 OneDrive and Turbopack Manifest Lock
+### 5.2 OneDrive and Turbopack File Lock
 
-**Problem:** The initial production build reached Next.js but failed when
-Turbopack attempted to rename a generated manifest file inside the
-OneDrive-synced project directory.
+**Problem:** Local builds sometimes failed because OneDrive locked generated
+manifest files while Next.js attempted to replace them.
 
-**Fix:** The local development command was configured to use webpack. A
-temporary custom build directory used during diagnosis was removed, and the
-production command was restored to standard `next build` so Vercel can use the
-normal `.next` output.
+**Fix:** Webpack was retained for the local development command, while the
+production build remained the Vercel-compatible `next build`. The same
+production build passed when the local file lock was not active.
 
-### 5.2 ESLint Scanning Generated Build Files
+### 5.3 Obsolete Generated Output and Configuration
 
-**Problem:** While a temporary custom build output was being tested, ESLint
-scanned generated JavaScript and type files and reported thousands of errors
-that did not come from the application source.
+**Problem:** The temporary `.next-build` directory and related ignore/type
+settings caused ESLint to inspect generated files and created inconsistent
+deployment configuration.
 
-**Fix:** Generated build output was excluded during diagnosis. The temporary
-custom output was then deleted, and the final project returned to Next.js's
-standard `.next` directory. The following lint run passed.
-
-### 5.3 Git Repository Initialization
-
-**Problem:** The starting folder was not a Git repository. The first
-initialization attempt also left a stale `config.lock` file because repository
-metadata access was restricted.
-
-**Fix:** The stale lock was removed after verifying that no Git configuration
-or history existed, and the repository was initialized successfully.
+**Fix:** The obsolete generated directory and related configuration were
+removed. ESLint then passed against the application source, and the normal
+`.next` build output was generated.
 
 ### 5.4 Current Product Limitations
 
@@ -303,15 +296,14 @@ The following checks were completed successfully:
 | `npm run build` | Passed |
 | `npm audit` | Passed with 0 vulnerabilities |
 
-The production build generated the Home, Planner, and About routes as static
-pages.
+The production build generated `/`, `/planner`, and `/about` as static pages.
 
 ## 7. Submission Links
 
 - **GitHub repository:**
   [https://github.com/goinmmul/Meal-Budget-Planner](https://github.com/goinmmul/Meal-Budget-Planner)
 - **Vercel deployment:**
-  [https://campus-meal-budget-planner-a4.vercel.app](https://campus-meal-budget-planner-a4.vercel.app)
+  [https://campus-meal-budget-planner-a4.vercel.app](https://campus-meal-budget-planner-a4.vercel.app/)
 
 The production deployment was verified by requesting the Home, Planner, and
 About pages. All three routes returned HTTP status 200.
