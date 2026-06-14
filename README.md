@@ -64,6 +64,8 @@ npm start
 
 ## Deployment
 
-Vercel deployment URL: `https://your-project-name.vercel.app`
+Vercel deployment URL:
+[https://campus-meal-budget-planner-a4.vercel.app](https://campus-meal-budget-planner-a4.vercel.app)
 
-The URL above is a placeholder and should be replaced after deployment.
+GitHub repository:
+[https://github.com/goinmmul/Meal-Budget-Planner](https://github.com/goinmmul/Meal-Budget-Planner)

@@ -5,7 +5,7 @@
 **Course:** Introduction to AI Programming  
 **Assignment:** Assignment 4  
 **Document status:** Final draft for submission  
-**Deployment status:** Not yet deployed
+**Deployment status:** Deployed
 
 ---
 
@@ -158,8 +158,8 @@ Next.js's standard `.next` output directory for Vercel compatibility.
 | 6. UI refinement | Add responsive layout and consistent styling | Complete |
 | 7. Documentation | Complete README, PRD, and AI Development Report | Complete |
 | 8. Validation | Run install, lint, build, and package audit checks | Complete |
-| 9. GitHub submission | Commit the project and publish the repository | Pending |
-| 10. Vercel submission | Deploy and replace URL placeholders | Pending |
+| 9. GitHub submission | Commit the project and publish the repository | Complete |
+| 10. Vercel submission | Deploy and replace URL placeholders | Complete |
 
 ---
 
@@ -287,8 +287,7 @@ or history existed, and the repository was initialized successfully.
 - Meal prices are estimates stored locally and may differ from actual prices.
 - Suggestions do not use location, dietary allergy, or nutrition data.
 - User entries are not saved after the page is closed or refreshed.
-- The application is not yet deployed.
-- The GitHub repository has not yet been published.
+- Meal suggestions remain intentionally limited to local data.
 
 These limitations are acceptable for the current assignment scope because the
 service is designed as a small client-side planning tool.
@@ -309,12 +308,13 @@ pages.
 
 ## 7. Submission Links
 
-- **GitHub repository:** `Add GitHub repository URL after publishing`
-- **Vercel deployment:** `https://your-project-name.vercel.app`
+- **GitHub repository:**
+  [https://github.com/goinmmul/Meal-Budget-Planner](https://github.com/goinmmul/Meal-Budget-Planner)
+- **Vercel deployment:**
+  [https://campus-meal-budget-planner-a4.vercel.app](https://campus-meal-budget-planner-a4.vercel.app)
 
-The Vercel URL is a placeholder. This document does not claim that deployment
-has been completed. Both placeholders must be replaced with the real links
-before final submission.
+The production deployment was verified by requesting the Home, Planner, and
+About pages. All three routes returned HTTP status 200.
 
 ## 8. Conclusion
 
@@ -322,5 +322,5 @@ Campus Meal Budget Planner meets the planned assignment scope. It provides
 three navigable pages, a meaningful client-side planning interaction, input
 validation, local meal suggestions, responsive styling, and complete project
 documentation. The source has passed lint, production build, and package audit
-checks. The remaining submission tasks are publishing the GitHub repository,
-deploying to Vercel, and replacing the link placeholders.
+checks. The GitHub repository and Vercel deployment are ready to include in the
+assignment submission.
