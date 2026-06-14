@@ -129,7 +129,8 @@ live restaurant information, or personalized nutrition guidance.
 
 The project uses webpack for development and production builds because
 Turbopack generated-file renaming was unreliable inside the OneDrive-synced
-project directory.
+project directory. It keeps Next.js's standard `.next` output directory for
+Vercel compatibility.
 
 ## 8. Design Requirements
 
@@ -258,16 +259,18 @@ Turbopack attempted to rename a generated manifest file inside the
 OneDrive-synced project directory.
 
 **Fix:** The project was configured to use webpack for both development and
-production builds. A separate ignored build output directory was also used.
+production builds. A temporary custom build directory used during local
+diagnosis was later removed so Vercel can use the standard `.next` output.
 
 ### 5.2 ESLint Scanning Generated Build Files
 
-**Problem:** After changing the build output directory, ESLint scanned generated
-JavaScript and type files and reported thousands of errors that did not come
-from the application source.
+**Problem:** While a temporary custom build output was being tested, ESLint
+scanned generated JavaScript and type files and reported thousands of errors
+that did not come from the application source.
 
-**Fix:** The generated `.next-build` directory was added to the global ESLint
-ignore list. The following lint run passed.
+**Fix:** Generated build output was excluded during diagnosis. The temporary
+custom output was then deleted, and the final project returned to Next.js's
+standard `.next` directory. The following lint run passed.
 
 ### 5.3 Git Repository Initialization
 
