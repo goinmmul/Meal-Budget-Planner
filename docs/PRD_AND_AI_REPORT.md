@@ -127,10 +127,10 @@ live restaurant information, or personalized nutrition guidance.
 - **Excluded systems:** Backend server, database, authentication, payment, and
   external API
 
-The project uses webpack for development and production builds because
-Turbopack generated-file renaming was unreliable inside the OneDrive-synced
-project directory. It keeps Next.js's standard `.next` output directory for
-Vercel compatibility.
+The local development command uses webpack because Turbopack generated-file
+renaming was unreliable inside the OneDrive-synced project directory. The
+production command remains the standard `next build`, and the project keeps
+Next.js's standard `.next` output directory for Vercel compatibility.
 
 ## 8. Design Requirements
 
@@ -258,9 +258,10 @@ The AI-generated implementation was reviewed and improved during development:
 Turbopack attempted to rename a generated manifest file inside the
 OneDrive-synced project directory.
 
-**Fix:** The project was configured to use webpack for both development and
-production builds. A temporary custom build directory used during local
-diagnosis was later removed so Vercel can use the standard `.next` output.
+**Fix:** The local development command was configured to use webpack. A
+temporary custom build directory used during diagnosis was removed, and the
+production command was restored to standard `next build` so Vercel can use the
+normal `.next` output.
 
 ### 5.2 ESLint Scanning Generated Build Files
 
